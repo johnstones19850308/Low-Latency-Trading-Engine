@@ -27,14 +27,14 @@ public:
         tail.store(dummy);
     }
 
-    // 주문 생산자 (Order Producer)
+    // Order Producer
     void enqueue(T val) {
         Node* newNode = new Node(val);
         Node* oldTail = tail.exchange(newNode);
         oldTail->next = newNode;
     }
 
-    // 주문 소비자 (Matching Engine / Consumer)
+    // Matching Engine / Consumer
     bool dequeue(T& res) {
         Node* oldHead = head.load();
         Node* nextNode = oldHead->next;
